@@ -1,10 +1,15 @@
 from aiogram.utils import executor
 from config import dp
-from handlers import client, callback, extra, admin, fsm_anketa
+from handlers import client, callback, extra, admin, fsm_anketa, sheduler
 import logging
 from database.bot_db import sql_create
+
+
 async def on_startup(_):
     sql_create()
+    await sheduler.set_scheduler()
+
+
 client.register_handlers_client(dp)
 callback.register_handlers_callback(dp)
 fsm_anketa.register_handlers_fsm_anketa(dp)

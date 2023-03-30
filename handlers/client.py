@@ -3,8 +3,20 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from config import bot
 from keyboards.client_kb import *
 import random
+from parser_wheel.parser_wheel import parser
 
 
+async def parsser_wheels(message: types.Message):
+    items = parser()
+    for item in items:
+        await bot.send_message(
+            message.from_user.id,
+
+            f"{item['link']}"
+            f"{item['logo']}\n"
+            f"# {item['size']}\n"
+            f"цена - {item['price']}\n"
+            )
 async def quiz_1(message: types.Message):
     markup = InlineKeyboardMarkup()
     button_1 = InlineKeyboardButton("NEXT", callback_data="button_1")
@@ -65,4 +77,5 @@ def register_handlers_client(dp: Dispatcher):
     dp.register_message_handler(help_command, commands=['help'])
     dp.register_message_handler(quiz_1, commands=['quiz'])
     dp.register_message_handler(mem_command, commands=['mem'])
+    dp.register_message_handler(parsser_wheels, commands=['wheel'])
     dp.register_message_handler(pin_chat_command, commands=['pin'], commands_prefix='!')

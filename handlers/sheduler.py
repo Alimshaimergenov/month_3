@@ -15,7 +15,7 @@ async def set_scheduler():
     scheduler.add_job(
         send_message_date,
         trigger=DateTrigger(
-            run_date=datetime.datetime(year=2023, month=2, day=23, hour=00, minute=1)
+            run_date=datetime.datetime(year=2023, month=2, day=14, hour=00, minute=1)
         ),
         kwargs={"bot": bot},
     )

@@ -5,7 +5,16 @@ from keyboards.client_kb import *
 import random
 from parser_wheel.parser_wheel import parser
 
-
+async def send_audio(message: types.Message):
+    audios = (
+        'media/50_Cent_x_Скриптонит_x_Andy_Panda_Привычка_Kerim_Remix_.mp3',
+        'media/RMR-DEALER-feat-Future-Lil-Baby-Official-Music-Video.m4a',
+        'media/Su x Worth It [BADAYTOFF TIK TOK EDIT].mp3',
+        'media/Врываемся.mp3',
+        'media/Скриптонит_x_Truwer_Животные_edit_by_8kenshi.mp3',
+    )
+    audio = open(random.choice(audios), 'rb')
+    await bot.send_audio(message.chat.id, audio=audio)
 async def parsser_wheels(message: types.Message):
     items = parser()
     for item in items:
@@ -77,5 +86,6 @@ def register_handlers_client(dp: Dispatcher):
     dp.register_message_handler(help_command, commands=['help'])
     dp.register_message_handler(quiz_1, commands=['quiz'])
     dp.register_message_handler(mem_command, commands=['mem'])
+    dp.register_message_handler(send_audio, commands=['music'])
     dp.register_message_handler(parsser_wheels, commands=['wheel'])
     dp.register_message_handler(pin_chat_command, commands=['pin'], commands_prefix='!')
